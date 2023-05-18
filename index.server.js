@@ -3,8 +3,9 @@ const app=express()
 const bodyParser=require('body-parser')
 const mongoose=require('mongoose')
 const userRoute=require('./Routes/userRoutes')
+require('dotenv').config()
 mongoose.set('strictQuery', true);
-mongoose.connect('mongodb+srv://natymok:naty1010mok@cluster0.tujeepg.mongodb.net/?retryWrites=true&w=majority',{ useNewUrlParser: true ,      useUnifiedTopology: true,}).
+mongoose.connect(process.env.MONGODB_URI,{ useNewUrlParser: true ,      useUnifiedTopology: true,}).
 then((data,err)=>{
   if(data){
    
@@ -18,8 +19,18 @@ then((data,err)=>{
 })
 app.use(bodyParser.json({limit: '50mb'}))
 app.use('/api',userRoute)
+if(process.env.NODE_ENV=='production')
+{   console.log('production mode active')
+   
+}
+else{
+  console.log('devv mode')
+  app.get('/',((req,res)=>{
+      res.send('api running')
+  }))
+}
 
-app.listen(3000,()=>{
+app.listen(process.env.PORT || 3000,()=>{
   console.log('server listineang on port 3000')
 })
 
