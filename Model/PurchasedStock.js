@@ -8,7 +8,7 @@ const userSchema=new mongoose.Schema({
     },
     userName:{
         type:String,
-        unique:true,
+   
         trim:true,
     
     },
@@ -26,7 +26,7 @@ const userSchema=new mongoose.Schema({
 
     },
     price:{
-        type:String,
+        type:Number,
    
 
     },
