@@ -1,5 +1,11 @@
 const mongoose=require('mongoose')
 const userSchema=new mongoose.Schema({
+    companyName:{
+        type:String,
+        unique:true,
+        trim:true,
+    
+    },
     stockName:{
         type:String,
         unique:true,

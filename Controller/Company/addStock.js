@@ -1,27 +1,26 @@
 const company=require('../../Model/Company')
+const stock=require('../../Model/Stock')
 exports.addStock=(req,res)=>{
 
-    const info={stockName:req.body.stockName,Description:req.body.Description,amount:req.body.amount,price:req.body.price}
-    const stock=[{...info}]
-  company.findOneAndUpdate({CompanyName:req.body.CompanyName},{Stock:stock},{new:true}).then((data)=>{
-    if(data){
-        res.status(200).json({
-            message:data
-        })
-    }
-    else{
-        res.status(400).json({
-            error:'somthing went wrong'
-        })
+    const info={stockName:req.body.stockName,Description:req.body.Description,amount:req.body.amount,price:req.body.price,companyName:req.body.companyName}
 
-    }
-  })
-  .catch((err)=>{
-    res.status(400).json({
-        error:'somthing went wrong'
+    const _stock=new stock({
+      ...info
+
     })
-  })
-
+    _stock.save((data)=>{
+      if(data){
+        res.status(200).json({
+          message:data
+        })
+      }
+    })
+    .catch((err)=>{
+      res.status(200).json(({
+        error:'something wrong'
+      }))
+    })
+  
   
 
 }
