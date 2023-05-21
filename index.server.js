@@ -3,6 +3,7 @@ const app=express()
 const bodyParser=require('body-parser')
 const mongoose=require('mongoose')
 const userRoute=require('./Routes/userRoutes')
+const cors=require('cors')
 require('dotenv').config()
 mongoose.set('strictQuery', true);
 mongoose.connect(process.env.MONGODB_URI,{ useNewUrlParser: true ,      useUnifiedTopology: true,}).
@@ -19,6 +20,7 @@ then((data,err)=>{
 })
 app.use(bodyParser.json({limit: '50mb'}))
 app.use('/api',userRoute)
+app.use(cors())
 if(process.env.NODE_ENV=='production')
 {   console.log('production mode active')
    
