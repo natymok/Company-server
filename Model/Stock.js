@@ -2,8 +2,7 @@ const mongoose=require('mongoose')
 const userSchema=new mongoose.Schema({
     companyName:{
         type:String,
-        unique:true,
-        trim:true,
+       
     
     },
     stockName:{
@@ -15,13 +14,13 @@ const userSchema=new mongoose.Schema({
     Description:{
         type:String,
       
-        trim:true
+    
 
     },
     amount:{
-        type:String,
+        type:Number,
 
-        trim:true,
+    
        
         lowercase:true
 
