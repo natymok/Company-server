@@ -20,7 +20,9 @@ then((data,err)=>{
 })
 app.use(bodyParser.json({limit: '50mb'}))
 app.use('/api',userRoute)
-app.use(cors())
+app.use(cors({
+  origin: 'https://stockcompany.onrender.com'
+}));
 if(process.env.NODE_ENV=='production')
 {   console.log('production mode active')
    
