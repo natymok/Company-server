@@ -1,6 +1,6 @@
 const company=require('../../Model/Company')
 exports.DeleteStock=(req,res)=>{
-    company.findOneAndUpdate({CompanyName:req.body.CompanyName},{Stock:[{}]},{new:true}).then((data)=>{
+    company.findOneAndUpdate({CompanyName:req.body.CompanyName},{Stock:[]},{new:true}).then((data)=>{
         if(data){
             res.status(200).json({
                 data:data
@@ -14,7 +14,7 @@ exports.DeleteStock=(req,res)=>{
     })
     .catch((err)=>{
         res.status(400).json({
-            error:'somthing went wrong'
+            error:err
         })
     })
 

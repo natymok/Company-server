@@ -8,6 +8,10 @@
     "express-validator": "^7.0.1",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.1.2",
-    "nodemailer": "^6.9.2"
+    "nodemailer": "^6.9.2",
+    "nodemon": "^2.0.22"
+  },
+  "scripts": {
+    "devStart" : "nodemon index.server.js"
   }
 }

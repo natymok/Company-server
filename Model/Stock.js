@@ -18,19 +18,23 @@ const userSchema=new mongoose.Schema({
 
     },
     amount:{
-        type:Number,
+        type:String,
 
     
        
-        lowercase:true
+    
 
 
     },
     price:{
-        type:String,
+        type:Number
    
 
     },
+    totalsell:{
+        type:Number,
+        default:0
+    }
   
 
    

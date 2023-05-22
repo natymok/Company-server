@@ -12,20 +12,20 @@ exports.companySignup=(req,res)=>{
     const _newcompany= new newCompany({
       ...req.body
     })
-    _newcompany.save((err,data)=>{
-      if(data){
-        res.status(200).json({
-          message:data
-        })
-
-      }
-      if(err){
-        res.status(400).json({
-          error:err
-        })
-
-      }
+ _newcompany.save().then((data)=>{
+  if(data){
+    res.status(200).json({
+      message:data
     })
+  }
+ })
+ .catch((err)=>{
+  res.status(200).json({
+    error:err
+  })
+ })
+
+ 
   }
 
  })

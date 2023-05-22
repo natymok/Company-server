@@ -1,12 +1,12 @@
 const mongoose=require('mongoose')
 const bcrypt=require('bcrypt')
 const userSchema=new mongoose.Schema({
-    CompanyName:{
+    companyName:{
          type:String,
         required:true,
         trim:true},
 
-    CompanyEmail:{
+    companyEmail:{
             type:String,
            required:true,
            trim:true},
@@ -15,45 +15,33 @@ const userSchema=new mongoose.Schema({
          type:String,
          required:true,
          trim:true},
-
-
-    Stock:[
-        { 
-
-            stockName:{
-                type:String,
+    verified:{
+        type:Boolean,
+        default:false
+    }
+    
+    
            
-                trim:true,
-            
-            },
-            Description:{
-                type:String,
-               
-                trim:true
-        
-            },
-            amount:{
-                type:String,
-            
-                trim:true,
-              
-               
-        
-        
-            },
-            price:{
-                type:String,
-                
-        
-            },
-           
-          
 
-    }],
+
+
+  
 
    
    
 
    
 }, {timestamps:true})
+
+userSchema.pre('save',async function(next){
+    const salt= await bcrypt.genSalt(10)
+    this.password= await bcrypt.hash(this.password,salt)
+    next()
+
+
+})
+userSchema.method({
+    authenticate:function(userpassword){
+        return bcrypt.compareSync(userpassword,this.password)},
+})
 module.exports=mongoose.model('Company',userSchema)

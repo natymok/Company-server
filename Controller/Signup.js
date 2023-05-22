@@ -1,9 +1,11 @@
-const users=require('../Model/user')
+users=require('../Model/user')
 const otpModel=require('../Model/Otp')
 const nodemailer=require('nodemailer')
 const user = require('../Model/user')
+const newcompany=require('../Model/newCompany')
+const company=require('../Model/Company')
 exports.signup=(req,res)=>{
-  users.findOne({email:req.body.email}).then((data)=>{
+  company.findOne({companyEmail:req.body.companyEmail}).then((data)=>{
     if(data){
       res.status(400).json({
         error:"email already exist"
@@ -11,17 +13,24 @@ exports.signup=(req,res)=>{
     }
     else{
     
-    
-                const _user=new users({
-                  ...req.body
-                })
-                _user.save((err,data)=>{
-                    if(data){
-                      sendOtp(req.body.email)
+      const _newcompany= new newcompany({
+        ...req.body
+      })
+      _newcompany.save().then((data)=>{
+        if(data){
+          sendOtp(req.body.companyEmail)
+        }
 
-                    }
-                })
+      })
+      .catch((err)=>{
+        res.status(200).json({
+          error:err
+        })
+      })
            
+
+            
+              
                  
              
            }
@@ -53,7 +62,7 @@ exports.signup=(req,res)=>{
     
 
       const _otP= new otpModel({
-        userEmail:email,
+           userEmail:email,
            otp:otP,
            createdAt:Date.now(),
            expiresAt:Date.now()+300000
