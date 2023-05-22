@@ -58,7 +58,7 @@ exports.signup=(req,res)=>{
   };
 
 
-
+  console.log(Date.now()+700000)
     
 
       const _otP= new otpModel({
@@ -66,6 +66,7 @@ exports.signup=(req,res)=>{
            otp:otP,
            createdAt:Date.now(),
            expiresAt:Date.now()+300000
+
 
 
       })

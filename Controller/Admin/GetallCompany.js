@@ -1,6 +1,6 @@
-const company=require('../../Model/Company') 
+const stock=require('../../Model/Stock') 
 exports.getallCompany=(req,res)=>{
-    company.find({}).then((data)=>{
+    stock.find({}).then((data)=>{
       if(data){
         res.status(200).json({message:data})
       }

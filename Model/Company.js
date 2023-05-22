@@ -15,11 +15,7 @@ const userSchema=new mongoose.Schema({
          type:String,
          required:true,
          trim:true},
-    verified:{
-        type:Boolean,
-        default:false
-    }
-    
+  
     
            
 
