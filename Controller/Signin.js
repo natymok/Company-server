@@ -17,7 +17,9 @@ exports.Signin=((req,res)=>{
                 const _token=signtoken(data._id)
                 res.status(200).json({
                     message:'sucessfully sined',
-                    user:_token
+                    Accesstoken:_token,
+                    companyName:data.companyName,
+                    amount:data.amount
                 })
 
                 

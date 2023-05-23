@@ -14,7 +14,7 @@ exports.companySignin=(req,res)=>{
                 const company=signAccesToken(user._id,user.CompanyName)
                 res.status(200).json({
                     message:'loged in',
-                    companyName:user.CompanyName,
+                    companyName:user.companyName,
                     Accesstoken:company,
                     amount:user.Stock[0].amount
 
