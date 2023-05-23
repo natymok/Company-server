@@ -1,26 +1,32 @@
 
 const company=require('../../Model/Company')
 const purchasedStock=require("../../Model/PurchasedStock")
+const stock=require('../../Model/Stock')
 exports.buyStock=(req,res)=>{
 
     const info={stockName:req.body.stockName,username:req.body.username,amount:req.body.amount,price:req.body.price}
-    company.findOne({CompanyName:req.body.CompanyName}).then((data)=>{
+    stock.findOne({companyName:req.body.companyName}).then((data)=>{
        if(data){
-        if(data.Stock){
-            data.Stock.map((item)=>{
-             
-                if(req.body.stockName==item.stockName){
-                    if(parseInt(req.body.price) == parseInt(req.body.amount )* parseInt(item.price)){
-                        const customerinfo={userName:req.body.username,CompanyName:req.body.CompanyName,price:parseInt(req.body.amount )* parseInt(item.price),amount:req.body.amount,stockName:req.body.stockName
+              if(parseInt(req.body.price) == parseInt(req.body.amount )* parseInt(data.price)){
+                        const customerinfo={userName:req.body.username,companyName:req.body.companyName,price:parseInt(req.body.amount )* parseInt(data.price),amount:req.body.amount,stockName:req.body.stockName
                         }
-
-                  const _purchasedStock=new purchasedStock ({
+                  const totalsell=data.totalsell + req.body.price
+                  const remainingStock=data.amount - req.body.price
+                
+                  const _purchasedStock=new purchasedStock ({                                                                                                                                                                                                                      
                       ...customerinfo
                              })
                         _purchasedStock.save() .then(()=>{
-                            res.status(200).json({
-                                message:"you have sucessfully buy stock"
+                            stock.findOneAndUpdate({companyName:req.body.companyName},{totalsell:totalsell,amount:remainingStock},{new:true})
+                            .then((data)=>{
+                                if(data){
+                                    res.status(200).json({
+                                        message:"you have sucessfully buy stock"
+                                    })
+
+                                }
                             })
+                          
             
     
                         })
@@ -34,15 +40,15 @@ exports.buyStock=(req,res)=>{
                             error:"something went wrong"
                         })
                     }
-                }
+                
                
 
-        })
+        
             
            
 
            
-        }
+        
        }
     })
   
