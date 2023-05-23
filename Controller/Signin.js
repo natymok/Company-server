@@ -10,7 +10,7 @@ exports.Signin=((req,res)=>{
     .then((data)=>{
         if(data){
 
-            
+                 
            
 
             if(data.authenticate(req.body.password)){

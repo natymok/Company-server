@@ -18,10 +18,10 @@ exports.validateRequest=[
 
     ]
     exports.validatesigninRequest=[
-        check('email')
+        check('companyEmail')
         .isEmail()
         .withMessage('enter valid email'),
-        check('email')
+        check('companyEmail')
         .notEmpty()
         .withMessage('enter your email first'),
         check('password')
