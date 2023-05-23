@@ -1,4 +1,4 @@
-const user=require('../Model/user')
+const company=require('../Model/Company')
 const jwt=require('jsonwebtoken')
 exports.Signin=((req,res)=>{
     const signtoken=(id=>{
@@ -6,12 +6,12 @@ exports.Signin=((req,res)=>{
        return token
 
     })
-    user.findOne({email:req.body.email})
+    company.findOne({companyEmail:req.body.companyEmail})
     .then((data)=>{
         if(data){
-            console.log(data,data.verified)
+
             
-           if(data.verified){
+           
 
             if(data.authenticate(req.body.password)){
                 const _token=signtoken(data._id)
@@ -31,29 +31,8 @@ exports.Signin=((req,res)=>{
             }
 
 
-           }
-           else{
-                               
-            user.findOneAndDelete({email:req.body.email})
-            .then((data)=>{
-                if(data){
-                    res.status(400).json({
-                        error:'user email not verified sign up agin'
-                    })
-                }
-                else{
-                    res.status(400).json({
-                        error:' something went wrong'
-                    })
-                }
-            })
-            .catch((err)=>{
-                res.status(400).json({
-                    error:' something went wrong'
-                })
-            })
-
-           }
+           
+           
            
         }
         else{

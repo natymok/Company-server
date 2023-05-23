@@ -7,7 +7,7 @@ exports.companySignin=(req,res)=>{
         const token=jwt.sign({id,CompanyName},'the net ninja',{expiresIn:'1y'})
         return token
      }
-     Company.findOne({CompanyEmail:email}).then((user)=>{
+     Company.findOne({companyEmail:email}).then((user)=>{
         if(user){
             if(user.password==password){
                 console.log(user.Stock[0].amount)

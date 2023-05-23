@@ -25,13 +25,7 @@ const newCompanychema=new mongoose.Schema({
 
    
 }, {timestamps:true})
-newCompanychema.pre('save',async function(next){
-    const salt= await bcrypt.genSalt(10)
-    this.password= await bcrypt.hash(this.password,salt)
-    next()
 
-
-})
 newCompanychema.method({
     authenticate:function(userpassword){
         return bcrypt.compareSync(userpassword,this.password)},
