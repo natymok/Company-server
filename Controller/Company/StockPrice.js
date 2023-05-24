@@ -2,7 +2,7 @@ const PurchasedStock=require('../../Model/PurchasedStock')
 exports.getStockPrice=(req,res)=>{
 
 
-        PurchasedStock.find({CompanyName:req.body.CompanyName}).then((data)=>{
+        PurchasedStock.find({companyName:req.body.companyName}).then((data)=>{
           if(data){
           
             let total=0
