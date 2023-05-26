@@ -10,11 +10,11 @@ purchasedStock.findOne({userName:req.body.userName,companyName:req.body.companyN
           {
             Stock.findOne({companyName:req.body.companyName}).then((data0)=>{
                 if(data0){
-                    Stock.findOneAndUpdate({companyName:req.body.companyName},{amount:(data0.amount + req.body.amount),totalsell:(data0.totalsell-((req.body.amount)*(data0.price)))},{new:true})
+                    Stock.findOneAndUpdate({companyName:req.body.companyName},{amount:(data0.amount + parseInt(req.body.amount)),totalsell:(data0.totalsell-((parseInt(req.body.amount))*(data0.price)))},{new:true})
                     .then((data1)=>{
                         if(data1){
                             
-                            purchasedStock.findOneAndUpdate({userName:req.body.userName},{amount:parseInt(item.amount )- (req.body.amount),price:item.price-((data1.price)*(req.body.amount))},{new:true})
+                            purchasedStock.findOneAndUpdate({userName:req.body.userName},{amount:parseInt(item.amount )- (parseInt(req.body.amount)),price:item.price-((data1.price)*(parseInt(req.body.amount)))},{new:true})
                             .then((data)=>{
                                 if(data){
                                     if(parseInt(data.amount) == 0)
