@@ -6,10 +6,9 @@ exports.getStockPrice=(req,res)=>{
           if(data){
           
             let total=0
-            let amount=0
+         
             data.map((item)=>{
-            
-              amount=parseInt(item.amount) + amount
+          
                total=parseInt(item.price) + total
               
               
@@ -18,7 +17,7 @@ exports.getStockPrice=(req,res)=>{
             })
             res.status(200).json({
               message:total,
-              amount:amount,
+             
               customers:data.length
 
 

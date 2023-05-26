@@ -1,11 +1,12 @@
 const user=require('../../Model/user')
 const otpModel=require('../../Model/Otp')
 const nodemailer=require('nodemailer')
+const company=require('../../Model/Company')
 exports.otpsend=(req,res)=>{
-user.findOne({email:req.body.email}).then((data)=>{
+company.findOne({companyEmail:req.body.companyEmail}).then((data)=>{
     if(data){
          console.log(data)
-        sendOtp(req.body.email)
+        sendOtp(req.body.companyEmail)
 
     }
     else{
