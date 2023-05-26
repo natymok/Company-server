@@ -16,7 +16,7 @@ exports.buyStock=(req,res)=>{
                   const _purchasedStock=new purchasedStock ({                                                                                                                                                                                                                      
                       ...customerinfo
                              })
-                             purchasedStock.findOne({userName:req.body.username})
+                             purchasedStock.findOne({userName:req.body.username,companyName:req.body.companyName})
                              .then((data0)=>{
                                 if(data0){
                                     purchasedStock.findOneAndUpdate({userName:req.body.username},{amount:parseInt(data0.amount)+req.body.amount,price:data0.price+(req.body.price)})
@@ -43,7 +43,7 @@ exports.buyStock=(req,res)=>{
                                 .then((data)=>{
                                     if(data){
                                         res.status(200).json({
-                                            message:"you have sucessfully buy stock"
+                                            message:"you have sucessfully buyy stock"
                                         })
     
                                     }
