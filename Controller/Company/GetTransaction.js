@@ -44,6 +44,11 @@ exports.getTransaction=(req,res)=>{
             
         
         }
+        else{
+            res.status(200).json({
+                error:'somthing wrong'
+            })
+        }
     })
 
   
