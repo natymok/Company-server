@@ -1,22 +1,16 @@
 const newcompany=require('../../Model/newCompany')
 exports.DeclineSignup=(req,res)=>{
-    newcompany.findOneAndDelete({companyName:req.body.companyName},((err,data)=>{
+    newcompany.findOneAndDelete({companyName:req.body.companyName})
+    .then((data)=>{
         if(data){
             res.status(200).json({
                 message:data
             })
-    
         }
-        if(err){
-            res.status(400).json({
-                error:err
-            })
-
-        }
-
-    }))
-       
-    
-      
-
+    })
+    .catch((err)=>{
+        res.status(400).json({
+            error:err
+        })
+    })
 }
