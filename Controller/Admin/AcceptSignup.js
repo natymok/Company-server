@@ -9,9 +9,7 @@ exports.Acceptsignup=(req,res)=>{
         if(_data){
             newCompany.findOneAndDelete({companyName:req.body.companyName}).then((data)=>{
                 if(data){
-                    res.status(200).json({
-                        message:_data
-                    })
+                   sendOtp(req.body.companyEmail)
 
                 }
             })
@@ -34,4 +32,55 @@ exports.Acceptsignup=(req,res)=>{
             error:err
         })
       })
+
+      sendOtp=(email)=>{
+     
+     
+                 // create reusable transporter object using the default SMTP transport
+      let transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: 'natymok1010@gmail.com', // generated ethereal user
+          pass: 'zhawqlemfkpqyccb', // generated ethereal password
+        },
+      });
+    
+      // send mail with defined transport object
+      let mailoption = {
+        from: '"Ethio Stock  👻" <natymok1010@gmail.com>', // sender address
+        to: email,
+        subject: "Successfully registerd ✔", // Subject line
+        html: `<p> signup Request accepted you can know signin to our system </p>`, // html body
+      };
+    
+    
+ 
+        
+    
+         
+              transporter.sendMail(mailoption).then((data)=>{
+                if(data){
+                  console.log(data)
+                  res.status(200).json({
+                    message:'we have sent otp to your email check your email'
+                  })
+                }
+              })
+              .catch((err)=>{
+                res.status(400).json({
+                  error:err
+                })
+              })
+            
+    
+          
+         
+    
+      }
+
+
+
+
+
+
 }
