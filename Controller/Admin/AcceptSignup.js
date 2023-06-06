@@ -61,15 +61,11 @@ exports.Acceptsignup=(req,res)=>{
               transporter.sendMail(mailoption).then((data)=>{
                 if(data){
                   console.log(data)
-                  res.status(200).json({
-                    message:'we have sent otp to your email check your email'
-                  })
+                 
                 }
               })
               .catch((err)=>{
-                res.status(400).json({
-                  error:err
-                })
+                console.log(err)
               })
             
     

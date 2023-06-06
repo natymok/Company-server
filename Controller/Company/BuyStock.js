@@ -8,7 +8,7 @@ exports.buyStock=(req,res)=>{
     stock.findOne({companyName:req.body.companyName}).then((data)=>{
        if(data){
               if(  parseInt(req.body.price) == parseInt(req.body.amount )* parseInt(data.price)){
-                        const customerinfo={userName:req.body.username,companyName:req.body.companyName,price:parseInt(req.body.amount )* parseInt(data.price),amount:req.body.amount,stockName:req.body.stockName
+                        const customerinfo={userName:req.body.username,companyName:req.body.companyName,price:parseInt(req.body.amount )* parseInt(data.price),amount:req.body.amount,stockName:req.body.stockName,insured:req.body.insured
                         }
                   const totalsell=data.totalsell + req.body.price
                   const remainingStock=data.amount - req.body.amount
