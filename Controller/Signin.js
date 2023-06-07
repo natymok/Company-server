@@ -19,7 +19,8 @@ exports.Signin=((req,res)=>{
                     message:'sucessfully sined',
                     Accesstoken:_token,
                     companyName:data.companyName,
-                    amount:data.amount
+                    amount:data.amount,
+                    balance:data.balance
                 })
 
                 

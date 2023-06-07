@@ -17,7 +17,12 @@ const userSchema=new mongoose.Schema({
          trim:true},
   
     
-           
+         balance:{
+            type:Number,
+            default:0
+        
+        },
+        
 
 
 

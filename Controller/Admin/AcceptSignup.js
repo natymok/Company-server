@@ -8,10 +8,14 @@ exports.Acceptsignup=(req,res)=>{
       _company.save().then((_data)=>{
         if(_data){
             newCompany.findOneAndDelete({companyName:req.body.companyName}).then((data)=>{
-                if(data){
-                   sendOtp(req.body.companyEmail)
+              
+                  if(data){
+                    res.status(200).json({
+                      message:data
+                    })
+                  }
 
-                }
+                
             })
             .catch((err)=>{
                 res.status(400).json({
