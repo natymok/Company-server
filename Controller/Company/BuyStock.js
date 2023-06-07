@@ -2,6 +2,7 @@
 const company=require('../../Model/Company')
 const purchasedStock=require("../../Model/PurchasedStock")
 const stock=require('../../Model/Stock')
+const stock=require('../../Model/user')
 exports.buyStock=(req,res)=>{
 
     const info={stockName:req.body.stockName,username:req.body.username,amount:req.body.amount,price:req.body.price}
@@ -30,8 +31,16 @@ exports.buyStock=(req,res)=>{
                                                         company.findOneAndUpdate({companyName:req.body.companyName},{balance:ittem.balance + parseInt(req.body.price)},{new:true})
                                                         .then((data)=>{
                                                             if(data){
-                                                                res.status(200).json({
-                                                                    message:'you have succesfully buyed stockkkk'
+                                                                user.findOne({email:req.body.username})
+                                                                .then((item)=>{
+                                                                    user.findOneAndUpdate({email:req.body.username},{balance:item.balance - parseInt(req.body.price)})
+                                                                    .then((data)=>{
+                                                                      if(data){
+                                                                          res.status(200).json({
+                                                                              message:'you have buyed stock'
+                                                                          })
+                                                                      }
+                                                                    })
                                                                 })
                                                             }
                                                             else{
@@ -67,9 +76,18 @@ exports.buyStock=(req,res)=>{
                                         company.findOneAndUpdate({companyName:req.body.companyName},{balance:values.balance+parseInt(req.body.price)},{new:true})
                                         .then((data)=>{
                                             if(data){
-                                                res.status(200).json({
-                                                    message:'you have succesfully buyed stockkkk'
+                                                user.findOne({email:req.body.username})
+                                                .then((item)=>{
+                                                    user.findOneAndUpdate({email:req.body.username},{balance:item.balance - parseInt(req.body.price)})
+                                                    .then((data)=>{
+                                                      if(data){
+                                                          res.status(200).json({
+                                                              message:'you have buyed stock'
+                                                          })
+                                                      }
+                                                    })
                                                 })
+                                               
                                             }
                                             else{
                                                 res.status(400).json({
