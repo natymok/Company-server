@@ -1,6 +1,6 @@
 const purchasedStock=require('../../Model/PurchasedStock')
 exports.getinsured=(req,res)=>{
-    purchasedStock.findOne({insured:true})
+    purchasedStock.find({insured:true})
     .then((data)=>{
         if(data){
             res.status(200).json({
