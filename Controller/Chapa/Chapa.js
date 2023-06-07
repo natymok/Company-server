@@ -12,7 +12,7 @@ const customerInfo =  {
     first_name: req.body.firstName,
     last_name: req.body.lastName,
     // tx_ref: 'tx-x12345', // if autoRef is set in the options we dont't need to provide reference, instead it will generate it for us
-    callback_url: `http://localhost:3000/api/chapaa/${req.body.amount},${req.body.email}`,
+    callback_url: `https://company-server-svea.onrender.com/api/chapaa/${req.body.amount},${req.body.email}`,
      return_url:'https://companystock-khv7.onrender.com/',  // your callback URL
     customization: {
         title: 'I love e-commerce',
