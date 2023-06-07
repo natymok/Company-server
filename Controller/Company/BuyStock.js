@@ -8,7 +8,7 @@ exports.buyStock=(req,res)=>{
     stock.findOne({companyName:req.body.companyName}).then((data)=>{
        if(data){
               if(  parseInt(req.body.price) == parseInt(req.body.amount )* parseInt(data.price)){
-                        const customerinfo={userName:req.body.username,companyName:req.body.companyName,price:parseInt(req.body.amount )* parseInt(data.price),amount:req.body.amount,stockName:req.body.stockName,insured:req.body.insured
+                        const customerinfo={insured:req.body.insured,userName:req.body.username,companyName:req.body.companyName,price:parseInt(req.body.amount )* parseInt(data.price),amount:req.body.amount,stockName:req.body.stockName,insured:req.body.insured
                         }
                   const totalsell=data.totalsell + req.body.price
                   const remainingStock=data.amount - req.body.amount
@@ -19,7 +19,7 @@ exports.buyStock=(req,res)=>{
                              purchasedStock.findOne({userName:req.body.username,companyName:req.body.companyName})
                              .then((data0)=>{
                                 if(data0){
-                                    purchasedStock.findOneAndUpdate({userName:req.body.username},{amount:parseInt(data0.amount)+parseInt(req.body.amount),price:data0.price+(req.body.price)})
+                                    purchasedStock.findOneAndUpdate({userName:req.body.username},{amount:parseInt(data0.amount)+parseInt(req.body.amount),price:data0.price+(req.body.price),insured:req.body.insured})
                                     .then(()=>{
                                         stock.findOneAndUpdate({companyName:req.body.companyName},{totalsell:totalsell,amount:remainingStock},{new:true})
                                         .then((data)=>{
