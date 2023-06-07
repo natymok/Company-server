@@ -27,7 +27,7 @@ exports.buyStock=(req,res)=>{
                                                 company.findOne({companyName:req.body.companyName})
                                                 .then((ittem)=>{
                                                     if(ittem){
-                                                        company.findOneAndUpdate({companyName:req.body.companyName},{balance:ittem.balance + req.body.price},{new:true})
+                                                        company.findOneAndUpdate({companyName:req.body.companyName},{balance:ittem.balance + parseInt(req.body.price)},{new:true})
                                                         .then((data)=>{
                                                             if(data){
                                                                 res.status(200).json({
@@ -64,7 +64,7 @@ exports.buyStock=(req,res)=>{
                                     if(data){
                                       company.findOne({companyName:req.body.companyName})
                                       .then((values)=>{
-                                        company.findOneAndUpdate({companyName:req.body.companyName},{balance:values.balance+req.body.price},{new:true})
+                                        company.findOneAndUpdate({companyName:req.body.companyName},{balance:values.balance+parseInt(req.body.price)},{new:true})
                                         .then((data)=>{
                                             if(data){
                                                 res.status(200).json({
