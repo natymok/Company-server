@@ -57,24 +57,27 @@ exports.buyStock=(req,res)=>{
                                 stock.findOneAndUpdate({companyName:req.body.companyName},{totalsell:totalsell,amount:remainingStock},{new:true})
                                 .then((data)=>{
                                     if(data){
-                                        company.findOneAndUpdate({companyName:req.body.companyName},{balance:req.body.price},{new:true})
-                                                .then((data)=>{
-                                                    if(data){
-                                                        res.status(200).json({
-                                                            message:'you have succesfully buyed stockkkk'
-                                                        })
-                                                    }
-                                                    else{
-                                                        res.status(400).json({
-                                                            message:'something went wrong'
-                                                        })
-                                                    }
+                                      company.findOne({companyName:req.body.companyName})
+                                      .then((values)=>{
+                                        company.findOneAndUpdate({companyName:req.body.companyName},{balance:values.balance+req.body.price},{new:true})
+                                        .then((data)=>{
+                                            if(data){
+                                                res.status(200).json({
+                                                    message:'you have succesfully buyed stockkkk'
                                                 })
-                                                .catch((Err)=>{
-                                                    res.status(400).json({
-                                                        message:'something went wrong'
-                                                    })
+                                            }
+                                            else{
+                                                res.status(400).json({
+                                                    message:'something went wrong'
                                                 })
+                                            }
+                                        })
+                                        .catch((Err)=>{
+                                            res.status(400).json({
+                                                message:'something went wrong'
+                                            })
+                                        })
+                                      })
     
                                     }
                                 })
