@@ -20,7 +20,7 @@ const userSchema=new mongoose.Schema({
     },
    
     amount:{
-        type:String,
+        type:Number,
 
     
 
