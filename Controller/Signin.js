@@ -14,6 +14,7 @@ exports.Signin=((req,res)=>{
            
 
             if(data.authenticate(req.body.password)){
+                console.log(data,'daaaaaaaaaa')
                 const _token=signtoken(data._id)
                 res.status(200).json({
                     message:'sucessfully sined',
