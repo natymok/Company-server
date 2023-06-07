@@ -19,28 +19,33 @@ exports.buyStock=(req,res)=>{
                              purchasedStock.findOne({userName:req.body.username,companyName:req.body.companyName})
                              .then((data0)=>{
                                 if(data0){
-                                    purchasedStock.findOneAndUpdate({userName:req.body.username},{amount:parseInt(data0.amount)+req.body.amount,price:data0.price+(req.body.price)})
+                                    purchasedStock.findOneAndUpdate({userName:req.body.username},{amount:parseInt(data0.amount)+parseInt(req.body.amount),price:data0.price+(req.body.price)})
                                     .then(()=>{
                                         stock.findOneAndUpdate({companyName:req.body.companyName},{totalsell:totalsell,amount:remainingStock},{new:true})
                                         .then((data)=>{
                                             if(data){
-                                                company.findOneAndUpdate({companyName:req.body.companyName},{balance:req.body.price},{new:true})
-                                                .then((data)=>{
-                                                    if(data){
-                                                        res.status(200).json({
-                                                            message:'you have succesfully buyed stockkkk'
+                                                company.findOne({companyName:req.body.companyName})
+                                                .then((ittem)=>{
+                                                    if(ittem){
+                                                        company.findOneAndUpdate({companyName:req.body.companyName},{balance:ittem.balance + req.body.price},{new:true})
+                                                        .then((data)=>{
+                                                            if(data){
+                                                                res.status(200).json({
+                                                                    message:'you have succesfully buyed stockkkk'
+                                                                })
+                                                            }
+                                                            else{
+                                                                res.status(400).json({
+                                                                    message:'something went wrong'
+                                                                })
+                                                            }
+                                                        })
+                                                        .catch((Err)=>{
+                                                            res.status(400).json({
+                                                                message:'something went wrong'
+                                                            })
                                                         })
                                                     }
-                                                    else{
-                                                        res.status(400).json({
-                                                            message:'something went wrong'
-                                                        })
-                                                    }
-                                                })
-                                                .catch((Err)=>{
-                                                    res.status(400).json({
-                                                        message:'something went wrong'
-                                                    })
                                                 })
             
                                             }
