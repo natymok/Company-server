@@ -24,7 +24,7 @@ exports.buyStock=(req,res)=>{
                                         stock.findOneAndUpdate({companyName:req.body.companyName},{totalsell:totalsell,amount:remainingStock},{new:true})
                                         .then((data)=>{
                                             if(data){
-                                                company.findOneAndUpdate({companyName:req.body.copmpanyName},{balance:req.body.price},{new:true})
+                                                company.findOneAndUpdate({companyName:req.body.companyName},{balance:req.body.price},{new:true})
                                                 .then((data)=>{
                                                     if(data){
                                                         res.status(200).json({
