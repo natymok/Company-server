@@ -11,7 +11,7 @@ exports.signup=(req,res)=>{
         error:"email already exist"
     })
     }
-    else{
+    else{   console.log(req.files,'nussss')
     
       const _newcompany= new newcompany({
         ...req.body
