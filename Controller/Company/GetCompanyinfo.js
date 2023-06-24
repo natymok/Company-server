@@ -4,9 +4,13 @@ exports.getCompanyinfo = (req, res) => {
   stock
     .findOne({ companyName: req.params.name })
     .then((data) => {
-      console.log(data);
+      res.status(200).json({
+        message: data,
+      });
     })
     .catch((err) => {
-      console.log(err);
+      res.status(400).json({
+        error: err,
+      });
     });
 };
