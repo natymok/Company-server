@@ -1,44 +1,28 @@
-const mongoose=require('mongoose')
-const userSchema=new mongoose.Schema({
-    companyName:{
-        type:String,
-        unique:true,
-
-       
-    
+const mongoose = require("mongoose");
+const userSchema = new mongoose.Schema(
+  {
+    companyName: {
+      type: String,
     },
-    stockName:{
-        type:String,
-        unique:true,
-        trim:true,
-    
+    stockName: {
+      type: String,
+
+      trim: true,
     },
-    Description:{
-        type:String,
-      
-    
-
+    Description: {
+      type: String,
     },
-    amount:{
-        type:Number,
-
-    
-       
-    
-
-
+    amount: {
+      type: Number,
     },
-    price:{
-        type:Number
-   
-
+    price: {
+      type: Number,
     },
-    totalsell:{
-        type:Number,
-        default:0
-    }
-  
-
-   
-}, {timestamps:true})
-module.exports=mongoose.model('Stock',userSchema)
+    totalsell: {
+      type: Number,
+      default: 0,
+    },
+  },
+  { timestamps: true }
+);
+module.exports = mongoose.model("Stock", userSchema);
