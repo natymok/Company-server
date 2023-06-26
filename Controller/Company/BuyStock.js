@@ -182,7 +182,7 @@ exports.buyStock = (req, res) => {
                                                 if (userr) {
                                                   res.status(200).json({
                                                     message:
-                                                      "you have succesfully buyed stockkkk",
+                                                      "you have succesfully Bought  stock",
                                                   });
                                                 }
                                               });
